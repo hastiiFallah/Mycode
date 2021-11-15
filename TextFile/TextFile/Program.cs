@@ -9,32 +9,15 @@ namespace TextFile
         {
             var filepath = @"E:\New folder\people.txt";
 
-           //List<string> lines= File.ReadAllLines(filepatch).ToList();
-           // foreach (string line in lines) 
-           // {
-           //     Console.WriteLine(line);
-           // }
 
-           // lines.Add("madarjende,angal,nanat");
-
-           // File.WriteAllLines(filepatch, lines);
-
-            var people=new List<Person>();
-
-            var lines = File.ReadAllLines(filepath).ToList();
-
-            foreach (string line in lines)
-            {
-                var entries = line.Split(',');
-                var newperson=new Person();
-
-                newperson.FirstName = entries[0];
-                newperson.LastName = entries[1];
-                newperson.Url = entries[2];
-
-
-                people.Add(newperson);
+            var people = File.ReadAllLines(filepath).Select(line => new Person 
+            { 
+                FirstName = line.Split(',')[0],  
+                LastName = line.Split(',')[1],
+                Url = line.Split(',')[2],
             }
+            ).ToList();
+
             Console.WriteLine("Read from text file...");
             foreach (var person in people)
             {
