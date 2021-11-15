@@ -7,34 +7,17 @@ namespace TextFile
     {
         static void Main(string[] args)
         {
-            string filepatch = @"E:\New folder\people.txt";
-
-           //List<string> lines= File.ReadAllLines(filepatch).ToList();
-           // foreach (string line in lines) 
-           // {
-           //     Console.WriteLine(line);
-           // }
-
-           // lines.Add("madarjende,angal,nanat");
-
-           // File.WriteAllLines(filepatch, lines);
-
-            List<Person> people=new List<Person>();
-
-            List<string> lines = File.ReadAllLines(filepatch).ToList();
-
-            foreach (string line in lines)
-            {
-                string[] entries = line.Split(',');
-                Person newperson=new Person();
-
-                newperson.FirstName = entries[0];
-                newperson.LastName = entries[1];
-                newperson.Url = entries[2];
+            var filepath = @"E:\New folder\people.txt";
 
 
-                people.Add(newperson);
+            var people = File.ReadAllLines(filepath).Select(line => new Person 
+            { 
+                FirstName = line.Split(',')[0],  
+                LastName = line.Split(',')[1],
+                Url = line.Split(',')[2],
             }
+            ).ToList();
+
             Console.WriteLine("Read from text file...");
             foreach (var person in people)
             {
@@ -44,14 +27,14 @@ namespace TextFile
 
             people.Add(new Person { FirstName = "hastii", LastName = "hast", Url = "hh.hh.com" });
             
-            List<string> output=new List<string>();
+            var output=new List<string>();
 
             foreach (var person in people)
             {
                 output.Add($"{person.FirstName},{person.LastName},{person.Url }");
             }
             Console.WriteLine("Writing to text file...");
-            File.WriteAllLines(filepatch, output);
+            File.WriteAllLines(filepath, output);
             Console.WriteLine("all entries writeen");
 
             Console.ReadLine();
