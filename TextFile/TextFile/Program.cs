@@ -7,7 +7,7 @@ namespace TextFile
     {
         static void Main(string[] args)
         {
-            string filepatch = @"E:\New folder\people.txt";
+            var filepath = @"E:\New folder\people.txt";
 
            //List<string> lines= File.ReadAllLines(filepatch).ToList();
            // foreach (string line in lines) 
@@ -19,14 +19,14 @@ namespace TextFile
 
            // File.WriteAllLines(filepatch, lines);
 
-            List<Person> people=new List<Person>();
+            var people=new List<Person>();
 
-            List<string> lines = File.ReadAllLines(filepatch).ToList();
+            var lines = File.ReadAllLines(filepath).ToList();
 
             foreach (string line in lines)
             {
-                string[] entries = line.Split(',');
-                Person newperson=new Person();
+                var entries = line.Split(',');
+                var newperson=new Person();
 
                 newperson.FirstName = entries[0];
                 newperson.LastName = entries[1];
@@ -44,14 +44,14 @@ namespace TextFile
 
             people.Add(new Person { FirstName = "hastii", LastName = "hast", Url = "hh.hh.com" });
             
-            List<string> output=new List<string>();
+            var output=new List<string>();
 
             foreach (var person in people)
             {
                 output.Add($"{person.FirstName},{person.LastName},{person.Url }");
             }
             Console.WriteLine("Writing to text file...");
-            File.WriteAllLines(filepatch, output);
+            File.WriteAllLines(filepath, output);
             Console.WriteLine("all entries writeen");
 
             Console.ReadLine();
